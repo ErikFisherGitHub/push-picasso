@@ -43,17 +43,15 @@ Alakzatok beszúrásához használd a `"alakzat_név"` formátumot:
 
 ```
 Hello "heart" World
-"star" Welcome "smile"
-Happy "thumbs_up" Coding
+"star" Welcome "smiley"
+Happy "diamond" Coding
 ```
 
 ### Elérhető alakzatok:
 - `heart` - ❤️ Szív alakzat
 - `star` - ⭐ Csillag alakzat  
-- `smile` - 😊 Mosolygó arc
-- `thumbs_up` - 👍 Tetszik gomb
-- `coffee` - ☕ Kávéscsésze
-- `rocket` - 🚀 Rakéta
+- `smiley` - 😊 Mosolygó arc
+- `diamond` - 💎 Gyémánt alakzat
 
 ## 📁 Fájlstruktúra
 
@@ -108,8 +106,8 @@ Output: Love ❤️ Code a contribution graph-on
 
 ### Több alakzat
 ```
-Input: ""star" GitHub "rocket""
-Output: ⭐ GitHub 🚀 a contribution graph-on
+Input: ""star" GitHub "diamond""
+Output: ⭐ GitHub 💎 a contribution graph-on
 ```
 
 ## 📋 Követelmények
@@ -139,7 +137,64 @@ git push -u origin main
 
 ## 🤝 Hozzájárulás
 
-Szívesen fogadok új alakzatokat, funkciókat és javításokat!
+Szívesen fogadok új alakzatokat, funkciókat és javításokat! Kérlek, kövesd az alábbi szabályokat:
+
+### 📋 Hozzájárulási szabályok
+
+#### 💻 Kód hozzájárulások
+1. **Objektumorientált stílus**: Tartsd be a meglévő OOP struktúrát
+2. **Magyar kommentek**: Dokumentáció és kommentek magyarul
+3. **Moduláris felépítés**: Új funkciókat a megfelelő core/ modulban helyezd el
+4. **Hibakezelés**: Mindig adj hozzá megfelelő try-catch blokkokat
+
+#### 🧪 Tesztelési követelmények
+1. **Alapfunkciók**: Teszteld minden menüpontot
+2. **Alakzatok**: Ellenőrizd az új alakzatok megjelenését
+3. **Hibakezelés**: Próbálj ki érvénytelen bemeneteket
+4. **Git műveletek**: Teszteld a commit generálást
+
+### 🔄 Hozzájárulási folyamat
+
+1. **Fork**: Készíts fork-ot a repository-ból
+2. **Branch**: Hozz létre új branch-et (`feature/uj-alakzat`)
+3. **Fejlesztés**: Valósítsd meg a változtatásokat
+4. **Tesztelés**: Teszteld alaposan a módosításokat
+5. **Commit**: Írj értelmezhető commit üzeneteket magyarul
+6. **Pull Request**: Küldj PR-t részletes leírással
+
+### ✅ Pull Request követelmények
+
+**Kötelező elemek:**
+- 📝 Részletes leírás magyarul
+- 🎯 Mi változott és miért
+- 🧪 Tesztelési lépések leírása
+- 📷 Képernyőképek (ha releváns)
+
+**Commit üzenet formátum:**
+```
+[TÍPUS]: Rövid leírás magyarul
+
+Részletes leírás a változtatásról...
+```
+
+**Típusok:**
+- `[ALAKZAT]`: Új alakzat hozzáadása
+- `[BETŰ]`: Új betű/karakter hozzáadása  
+- `[FUNKCIÓ]`: Új funkció implementálása
+- `[JAVÍTÁS]`: Hibajavítás
+- `[DOKUMENTÁCIÓ]`: Dokumentáció frissítése
+
+### 🚫 Nem fogadható hozzájárulások
+
+- ❌ Nem 5x5-ös vagy 5x4-es minták
+- ❌ Helytelen formátumú kód
+- ❌ Angol kommentek/dokumentáció
+- ❌ A meglévő API törése
+- ❌ Teszteletlen kód
+- ❌ Nem követi a projekt stílusát
+
+**Kapcsolatfelvétel:**
+Ha kérdésed van, nyiss GitHub Issue-t vagy írj részletes PR leírást!
 
 ## 📄 Licenc
 
