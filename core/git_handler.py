@@ -110,98 +110,21 @@ class GitHandler:
             art_data_dir = os.path.join(self.repo_path, 'art_data')
             self._remove_readonly_dir(art_data_dir)
             
-            # Git history reset a kezdeti commit-ra (ha van)
+            # Art fájlok törlése a git index-ből is (ha vannak)
             try:
-                # Megnézzük, van-e initial commit
-                result = subprocess.run(['git', 'log', '--oneline'], 
+                # Ellenőrizzük van-e art_data mappa a git-ben
+                result = subprocess.run(['git', 'ls-files', 'art_data/'], 
                                       capture_output=True, text=True, cwd=self.repo_path)
                 if result.returncode == 0 and result.stdout.strip():
-                    # Van commit history, reseteljük a legelsőre
-                    first_commit = subprocess.run(['git', 'rev-list', '--max-parents=0', 'HEAD'], 
-                                                capture_output=True, text=True, cwd=self.repo_path)
-                    if first_commit.returncode == 0 and first_commit.stdout.strip():
-                        first_commit_hash = first_commit.stdout.strip()
-                        subprocess.run(['git', 'reset', '--hard', first_commit_hash], cwd=self.repo_path)
-                        print("🔄 Git history visszaállítva az első commit-ra")
+                    # Van art_data fájl a git-ben, távolítsuk el
+                    subprocess.run(['git', 'rm', '-rf', 'art_data/'], cwd=self.repo_path)
+                    subprocess.run(['git', 'commit', '-m', 'Törölve art adatok'], cwd=self.repo_path)
+                    print("🔄 Art commit-ok eltávolítva a git history-ból")
             except Exception as git_error:
-                print(f"⚠️  Git history reset sikertelen: {git_error}")
+                print(f"⚠️  Git fájl törlés sikertelen: {git_error}")
             
             print("✅ Art adatok sikeresen törölve!")
             return True
         except Exception as e:
             print(f"❌ Hiba az art adatok törlésekor: {e}")
-            return False
-    
-    def clean_github_repository(self):
-        """GitHub repository teljes tisztítása."""
-        try:
-            # Próbáljuk meg lekérni a távoli URL-t
-            remote_url = self.get_remote_url()
-            if not remote_url:
-                print("❌ Nincs beállított távoli repository!")
-                return False
-            
-            current_branch = self.get_current_branch()
-            if not current_branch:
-                print("❌ Nem sikerült meghatározni a jelenlegi branch-et!")
-                return False
-            
-            print(f"🔄 GitHub repository tisztítása...")
-            print(f"📍 Repository: {remote_url}")
-            print(f"🌿 Branch: {current_branch}")
-            
-            # Lokális tisztítás először
-            if not self.clean_repository():
-                return False
-            
-            # Git repo újrainicializálása
-            self.init_git_repo()
-            
-            # README.md létrehozása (hogy legyen mit commit-olni)
-            readme_content = """# GitHub Art Generator
-
-Ez a repository a GitHub Art Generator által generált commit történetet tartalmazza.
-"""
-            with open(os.path.join(self.repo_path, 'README.md'), 'w', encoding='utf-8') as f:
-                f.write(readme_content)
-            
-            # Első commit
-            subprocess.run(['git', 'add', 'README.md'], cwd=self.repo_path)
-            subprocess.run(['git', 'commit', '-m', 'Initial commit'], cwd=self.repo_path)
-            
-            # Remote hozzáadása
-            subprocess.run(['git', 'remote', 'add', 'origin', remote_url], cwd=self.repo_path)
-            
-            # Force push az új történettel
-            result = subprocess.run(['git', 'push', '-f', 'origin', current_branch], 
-                                  cwd=self.repo_path, capture_output=True, text=True)
-            
-            if result.returncode == 0:
-                print("✅ GitHub repository sikeresen megtisztítva!")
-                print("🎉 Az új, tiszta repository elérhető a GitHub-on!")
-                return True
-            else:
-                print(f"❌ Hiba a GitHub push során: {result.stderr}")
-                return False
-                
-        except Exception as e:
-            print(f"❌ Hiba a GitHub repository tisztítása során: {e}")
-            return False
-    
-    def get_remote_url(self):
-        """Visszaadja a remote repository URL-t."""
-        try:
-            result = subprocess.run(['git', 'remote', 'get-url', 'origin'], 
-                                  capture_output=True, text=True, cwd=self.repo_path)
-            return result.stdout.strip() if result.returncode == 0 else None
-        except:
-            return None
-    
-    def get_current_branch(self):
-        """Visszaadja a jelenlegi branch nevét."""
-        try:
-            result = subprocess.run(['git', 'branch', '--show-current'], 
-                                  capture_output=True, text=True, cwd=self.repo_path)
-            return result.stdout.strip() if result.returncode == 0 else None
-        except:
-            return None 
+            return False 

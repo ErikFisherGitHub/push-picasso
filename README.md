@@ -1,144 +1,150 @@
-# 🎨 Push Picasso
+# Push Picasso
 
-Ez a Python program lehetővé teszi egyedi minták, alakzatok és szövegek rajzolását a GitHub contribution graph-ba automatikus git commit-ok generálásával. Az alkalmazás támogatja az inline alakzatok használatát a szövegben.
+🎨 **Push Picasso** - GitHub Contribution Graph művészet generátor
 
-## ✨ Funkciók
+Kreatív alkotásokat készíthetsz a GitHub contribution graph-odra szövegek és alakzatok kombinálásával!
 
-- 📝 **Szöveg kiírása** (1 vagy 2 soros) inline alakzatokkal
-- ❤️ **Alakzatok rajzolása** (szív, csillag, mosoly, gyémánt)
-- 🎨 **Kombinált art létrehozás** szöveg + alakzatok egyszerre
-- 🤖 **Automatikus git commit generálás** megfelelő dátumokkal
-- 👀 **Mintaelőnézet** a konzolban
-- 📅 **Dátum-alapú pozicionálás**
-- 🎯 **Automatikus középre igazítás** (opcionális manuális pozicionálás)
-- 🗑️ **Repository tisztítás** (helyi és GitHub teljes törlés)
+## 🌟 Funkciók
 
-## 🚀 Telepítés és használat
+- 📝 **Szöveg kiírás** - 5x4-es betűtípussal
+- 🎨 **Alakzatok rajzolása** - 5x5-ös méretben (szív, csillag, emoji-k)
+- 🔄 **Kombinált art** - Szöveg és alakzatok keverése
+- 🗑️ **Art adatok törlése** - Biztonságos commit history tisztítás
+- 🎯 **Moduláris felépítés** - Objektumorientált kód szerkezet
 
-### 1. Repository klónozása/letöltése
+## 🚀 Használat
+
+### 1. Indítás
+```bash
+python push_picasso.py
+```
+
+### 2. Menü opciók
+
+**1. 🎨 Art létrehozása**
+- Egyszerű prompt: "Mit írjunk ki?"
+- Támogatja szöveg és alakzatok keverését
+- Példa: `Hello "heart" World` → Hello ❤️ World
+
+**2. 👀 Elérhető alakzatok**
+- Az összes alakzat megjelenítése előnézettel
+- Használati utasítások
+
+**3. 🗑️ Art adatok törlése**
+- Biztonságos helyi adatok törlése
+- Git history tisztítás az art_data mappából
+
+**4. 🚪 Kilépés**
+- Program bezárása
+
+## 🎨 Alakzatok használata
+
+Alakzatok beszúrásához használd a `"alakzat_név"` formátumot:
+
+```
+Hello "heart" World
+"star" Welcome "smile"
+Happy "thumbs_up" Coding
+```
+
+### Elérhető alakzatok:
+- `heart` - ❤️ Szív alakzat
+- `star` - ⭐ Csillag alakzat  
+- `smile` - 😊 Mosolygó arc
+- `thumbs_up` - 👍 Tetszik gomb
+- `coffee` - ☕ Kávéscsésze
+- `rocket` - 🚀 Rakéta
+
+## 📁 Fájlstruktúra
+
+```
+push-picasso/
+├── push_picasso.py          # Fő alkalmazás
+├── core/                    # Moduláris komponensek
+│   ├── __init__.py
+│   ├── git_handler.py       # Git műveletek
+│   ├── layout_manager.py    # Elrendezés kezelés
+│   ├── shape_renderer.py    # Alakzatok rajzolása
+│   └── text_renderer.py     # Szöveg kiírás
+├── patterns/                # Minták tárolása
+│   ├── __init__.py
+│   ├── alphabet.py          # Betű minták
+│   └── shapes.py           # Alakzat minták
+├── art_data/               # Generált commit fájlok
+├── requirements.txt        # Függőségek
+└── README.md              # Dokumentáció
+```
+
+## ⚙️ Technikai részletek
+
+### Méretkonvenció
+- **Szövegek**: 5 magas × 4 széles
+- **Alakzatok**: 5 magas × 5 széles
+
+### Git működés
+- Minden pixel = 1 commit az adott napon
+- Dátum-alapú commit generálás
+- art_data/ mappában tárolódnak a commit fájlok
+
+### Biztonságos adattörlés
+A 3. menüpont biztonságosan törli az art adatokat:
+- Csak az `art_data/` mappa törlése
+- Git history tisztítás az art commit-okból
+- A program forráskódja érintetlen marad
+
+## 🎯 Példa művek
+
+### Egyszerű szöveg
+```
+Input: "Hello"
+Output: HELLO szöveg a contribution graph-on
+```
+
+### Szöveg alakzattal
+```
+Input: "Love "heart" Code"
+Output: Love ❤️ Code a contribution graph-on
+```
+
+### Több alakzat
+```
+Input: ""star" GitHub "rocket""
+Output: ⭐ GitHub 🚀 a contribution graph-on
+```
+
+## 📋 Követelmények
+
+- Python 3.6+
+- Git telepítve és beállítva
+- GitHub account
+
+## 🔧 Telepítés
+
+1. Repository klónozása:
 ```bash
 git clone <repository-url>
 cd push-picasso
 ```
 
-### 2. Python futtatása
+2. Program futtatása:
 ```bash
 python push_picasso.py
 ```
 
-### 3. Követd a menü utasításait
-A program egyszerű menüt kínál:
-- **Art létrehozása** - szöveg + alakzatok kombinálva
-- **Elérhető alakzatok** megtekintése  
-- **Lokális törlés** - helyi commit-ok törlése
-- **GitHub törlés** - teljes repository tisztítás
-- **Kilépés**
-
-## 📋 Használati példák
-
-### Art létrehozása (szöveg + alakzatok)
-```
-1. Válaszd az "1" opciót
-2. Hány soros szöveget szeretnél? (1-2): 2
-3. 1. sor: HELLO "heart" WORLD
-4. 2. sor: "star" GITHUB "diamond"
-5. Automatikus pozicionálás és rajzolás
+3. GitHub feltöltés:
+```bash
+git remote add origin <your-github-repo-url>
+git push -u origin main
 ```
 
-### Inline alakzatok használata
-A szövegben `"alakzat"` formátumban írd be az alakzatokat:
-- `HELLO "heart" WORLD` - szív a szöveg közepén
-- `"star" CODE ART "diamond"` - csillag elején, gyémánt végén
-- `GITHUB "smiley"` - mosolygó a szöveg végén
+## 🤝 Hozzájárulás
 
-### Elérhető alakzatok megtekintése
-```
-1. Válaszd a "2" opciót
-2. Megtekintheted az összes alakzat előnézetét
-```
+Szívesen fogadok új alakzatokat, funkciókat és javításokat!
 
-### Repository tisztítás
-```
-Lokális tisztítás:
-1. Válaszd a "3" opciót
-2. Erősítsd meg: "i"
+## 📄 Licenc
 
-GitHub teljes tisztítás:
-1. Válaszd a "4" opciót  
-2. GitHub URL beállítása (ha szükséges)
-3. Erősítsd meg: "i"
-```
-
-## 🎯 Elérhető alakzatok
-
-Az inline használatra elérhető alakzatok:
-
-- **"heart"** ❤️ - Szív alakzat
-- **"star"** ⭐ - Csillag
-- **"smiley"** 😊 - Mosolygó arc  
-- **"diamond"** 💎 - Gyémánt
-
-### Inline alakzatok használata
-Az alakzatokat a szövegbe ágyazva használhatod:
-```
-Példák:
-- HELLO "heart" WORLD
-- "star" GITHUB
-- CODE "smiley" ART "diamond"
-```
-
-Az alakzatok automatikusan felismerésre kerülnek és a szöveg részeként kerülnek elhelyezésre a GitHub contribution graph-ban.
-
-## ⚙️ Működés
-
-1. **Grid System**: A GitHub contribution graph 53 hét x 7 nap rácsos rendszer
-2. **Dátum számítás**: A program automatikusan kiszámítja a megfelelő dátumokat
-3. **Commit generálás**: Minden rajzolt ponthoz 1-4 commit készül a megfelelő dátummal
-4. **Git repository**: Automatikusan inicializálja a git repo-t, ha szükséges
-
-## 📁 Fájl struktúra
-
-```
-push-picasso/
-├── push_picasso.py   # Fő program
-├── requirements.txt  # Python függőségek (üres, csak stdlib)
-├── README.md         # Ez a fájl
-└── art_data/         # Automatikusan generált commit fájlok
-```
-
-## ⚠️ Fontos megjegyzések
-
-1. **GitHub szinkronizálás**: A program csak helyi git commit-okat hoz létre
-2. **Feltöltés**: A végén fel kell tölteni GitHub-ra: `git push origin <branch-név>`
-3. **Dátum korlátok**: Csak múltbeli dátumokra lehet commit-ot készíteni
-4. **Grid méret**: Maximum 53 hét x 7 nap (GitHub limit)
-
-## 🔧 Testreszabás
-
-A `push_picasso.py` fájlban könnyen módosítható:
-- **Betű minták** (`get_alphabet_patterns()`) - új betűk hozzáadása
-- **Alakzat minták** (`get_shape_patterns()`) - új alakzatok létrehozása  
-- **Commit intenzitás** (1-4 közötti értékek) - színek sötétsége
-- **Pozicionálás algoritmus** (`_place_inline_elements()`) - elrendezés logika
-- **Parsing szabályok** (`parse_text_with_shapes()`) - inline alakzat felismerés
-
-## 💡 Tippek
-
-- **Inline alakzatok**: Használj `"alakzat"` formátumot a szövegben
-- **Kombinációk**: Vegyíts szöveget és alakzatokat kreativitásért
-- **Előnézet**: Nézd meg az elérhető alakzatokat a 2. menüpontban
-- **Tisztítás**: Használd a GitHub törlést a teljes újrakezdéshez
-- **Biztonsági kérdések**: `i` = igen, `n` = nem (gyors válaszadás)
-
-## 🤝 Közreműködés
-
-Ha új funkciót vagy javítást szeretnél hozzáadni:
-1. Fork-old a repository-t
-2. Készítsd el a módosításokat
-3. Küldj pull request-et
+MIT
 
 ---
 
-**Készítette**: Push Picasso by [@ErikFisherGitHub](https://github.com/ErikFisherGitHub)  
-**Nyelv**: Python 3.6+  
-**Licence**: MIT 
+**Push Picasso** - Tedd művészetté a GitHub contribution graph-od! 🎨✨ 

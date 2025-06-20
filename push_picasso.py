@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-GitHub Art Generator - Fő alkalmazás
+Push Picasso - Fő alkalmazás
 Objektumorientált, moduláris felépítés
 Egységes méretkonvenció: Szövegek 5x4, Alakzatok 5x5
 """
@@ -10,7 +10,7 @@ import sys
 from core import GitHandler, TextRenderer, ShapeRenderer, LayoutManager
 
 
-class GitHubArtGenerator:
+class PushPicasso:
     """Fő alkalmazás osztály."""
     
     def __init__(self, repo_path: str = "."):
@@ -37,13 +37,12 @@ class GitHubArtGenerator:
     def show_main_menu(self):
         """Főmenü megjelenítése."""
         print("\n" + "─" * 54)
-        print("🎯 GitHub Art Generator - Főmenü")
+        print("🎯 Push Picasso - Főmenü")
         print("─" * 54)
         print("1. 🎨 Art létrehozása (szöveg + alakzatok)")
         print("2. 👀 Elérhető alakzatok listája")
         print("3. 🗑️  Art adatok törlése (commit history reset)")
-        print("4. 🌐 GitHub törlés (lokális + távoli teljes tisztítás)")
-        print("5. 🚪 Kilépés")
+        print("4. 🚪 Kilépés")
     
     def show_available_shapes(self):
         """Elérhető alakzatok megjelenítése."""
@@ -57,8 +56,8 @@ class GitHubArtGenerator:
             print(f"\n🔹 {shape_name}:")
             self.shape_renderer.show_preview(pattern)
         
-        print(f"\n💡 Használat: Írj be '{{alakzat_név}}' a szövegbe")
-        print(f"   Például: 'Hello {{heart}} World'")
+        print(f"\n💡 Használat: Írj be '\"alakzat_név\"' a szövegbe")
+        print(f"   Például: 'Hello \"heart\" World'")
         print(f"\n📏 Méretkonvenció:")
         print(f"   • Szövegek: 5 magas × 4 széles")
         print(f"   • Alakzatok: 5 magas × 5 széles")
@@ -69,25 +68,13 @@ class GitHubArtGenerator:
         self.git_handler.init_git_repo()
         
         # Kezdő információk
-        print("🎨 GitHub Contribution Graph Art Generator")
+        print("🎨 Push Picasso")
         print("=" * 60)
-        print("📏 Egységes méretkonvenció:")
-        print("   • Szövegek: 5 magas × 4 széles")
-        print("   • Alakzatok: 5 magas × 5 széles")
-        print(f"\nGrid kezdő dátuma: {self.start_date}")
-        print(f"Grid vég dátuma: {self.end_date}")
-        
-        # Repository statisztikák
-        total_commits, commits_today = self.git_handler.get_repository_stats()
-        if total_commits > 0:
-            print(f"📊 Repository statisztikák:")
-            print(f"   📈 Összes commit: {total_commits}")
-            print(f"   📅 Ma: {commits_today} commit")
         
         while True:
             try:
                 self.show_main_menu()
-                choice = self.safe_input("\nVálassz egy opciót (1-5): ").strip()
+                choice = self.safe_input("\nVálassz egy opciót (1-4): ").strip()
                 
                 if choice == '1':
                     self.layout_manager.create_combined_art()
@@ -96,17 +83,6 @@ class GitHubArtGenerator:
                 elif choice == '3':
                     self.git_handler.clean_repository()
                 elif choice == '4':
-                    confirmation = self.safe_input(
-                        "⚠️  FIGYELEM! Ez törli az ÖSSZES commit-ot a GitHub repository-ból!\n"
-                        "Ez egy visszafordíthatatlan művelet!\n"
-                        "Biztosan folytatod? (igen/nem): "
-                    ).strip().lower()
-                    
-                    if confirmation in ['igen', 'i', 'yes', 'y']:
-                        self.git_handler.clean_github_repository()
-                    else:
-                        print("❌ GitHub törlés megszakítva.")
-                elif choice == '5':
                     print("👋 Viszlát!")
                     break
                 else:
@@ -130,21 +106,15 @@ def main():
     
     try:
         # Alkalmazás indítása
-        app = GitHubArtGenerator()
+        app = PushPicasso()
         app.run()
         
         print("\n✅ Program befejezve!")
         print("💡 Ne felejtsd el a változtatásokat feltölteni GitHub-ra:")
         print("   git remote add origin <repository-url>")
         print("   git push -u origin <branch-név>")
+        print("💡 A jelenlegi branch nevét a 'git branch' paranccsal tudod megnézni.")
         
-        # Branch név megjelenítése
-        current_branch = app.git_handler.get_current_branch()
-        if current_branch:
-            print(f"💡 A jelenlegi branch neve: {current_branch}")
-        else:
-            print("💡 A jelenlegi branch nevét a 'git branch' paranccsal tudod megnézni.")
-            
     except Exception as e:
         print(f"❌ Váratlan hiba: {e}")
         sys.exit(1)

@@ -15,7 +15,7 @@ class LayoutManager:
         Szöveget elemez és szétválasztja szöveg és alakzat elemekre.
         
         Args:
-            text: Bemenet szöveg (pl. "Hello {heart} World")
+            text: Bemenet szöveg (pl. "Hello \"heart\" World")
             compact: Nem használt paraméter (backward compatibility)
             
         Returns:
@@ -26,8 +26,8 @@ class LayoutManager:
         elements = []
         current_pos = 0
         
-        # Regex minta az alakzatok keresésére: {alakzat_név}
-        shape_pattern = r'\{(' + '|'.join(available_shapes) + r')\}'
+        # Regex minta az alakzatok keresésére: "alakzat_név"
+        shape_pattern = r'"(' + '|'.join(available_shapes) + r')"'
         
         for match in re.finditer(shape_pattern, text):
             # Szöveg hozzáadása az alakzat előtt (ha van)
@@ -70,21 +70,9 @@ class LayoutManager:
         """Kombinált art létrehozása szöveg és alakzatok keverékével."""
         print("🎨 Kombinált Art Létrehozása")
         print("=" * 50)
-        print("💡 Tipp: Alakzatok beszúrásához használd a {alakzat_név} formátumot")
-        
-        # Elérhető alakzatok megjelenítése
-        available_shapes = self.shape_renderer.get_available_shapes()
-        print(f"📋 Elérhető alakzatok: {', '.join(available_shapes)}")
-        
-        # Előnézetek
-        print("\n🔍 Alakzat előnézetek:")
-        shapes = self.shape_renderer.shape_patterns.get_patterns()
-        for shape_name, pattern in shapes.items():
-            print(f"\n{shape_name}:")
-            self.shape_renderer.show_preview(pattern)
         
         # Szöveg bekérése
-        text = input("\n📝 Add meg a szöveget alakzatokkal (pl. 'Hello {heart} World'): ").strip()
+        text = input("📝 Mit írjunk ki? ").strip()
         
         if not text:
             print("❌ Üres szöveg!")

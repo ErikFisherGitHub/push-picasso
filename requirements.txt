@@ -1,3 +1,3 @@
-# GitHub Art Generator függőségek
+# Push Picasso függőségek
 # A program alapvetően csak Python standard library-t használ
 # További hasznos csomagok opcionálisan: 
